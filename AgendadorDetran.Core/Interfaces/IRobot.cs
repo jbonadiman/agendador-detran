@@ -1,7 +1,9 @@
-﻿namespace AgendadorDetran.Core.Interfaces
+﻿using System.Threading.Tasks;
+
+namespace AgendadorDetran.Core.Interfaces
 {
     public interface IRobot
     {
-        void Run();
+        Task Run();
     }
 }

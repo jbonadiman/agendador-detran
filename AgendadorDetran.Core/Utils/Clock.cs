@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Threading;
+using System.Threading.Tasks;
 using AgendadorDetran.Core.Interfaces;
 
 namespace AgendadorDetran.Core.Utils
@@ -41,7 +42,34 @@ namespace AgendadorDetran.Core.Utils
             
             timer.Dispose();
         }
+        
+        /// <summary>
+        /// Waits for a specified condition to be true
+        /// </summary>
+        /// <param name="predicate">The condition that should be tested every <see cref="Clock"/> tick</param>
+        /// <param name="timeout">The timeout as a <see cref="TimeSpan"/></param>
+        /// <returns>The elapsed time</returns>
+        public async Task<TimeSpan> StopUntilConditionAsync(Func<Task<bool>> predicate, TimeSpan timeout)
+        {
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
 
+            while (stopwatch.Elapsed <= timeout)
+            {
+                if (await predicate())
+                {
+                    stopwatch.Stop();
+                    return stopwatch.Elapsed;
+                }
+
+                this.StopFor(this.Tick);
+            }
+
+            stopwatch.Stop();
+            throw new TimeoutException(
+                $"After waiting for {timeout.TotalSeconds} second(s) the expected condition was not fulfilled");
+        }
+        
         /// <summary>
         /// Waits for a specified condition to be true
         /// </summary>

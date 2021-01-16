@@ -36,7 +36,7 @@ namespace AgendadorDetran.Core.Utils
             this._clock.StopUntilCondition(
                 () =>
                 {
-                    element = this._driver.FindElement(by);
+                    element = this._driver.FindElement(@by);
                     return element != null;
                 }, timeout);
 
