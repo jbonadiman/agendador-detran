@@ -36,13 +36,7 @@ namespace AgendadorDetran.Core.Robots
 
             var formData = new FormData
             {
-                ***REMOVED***
-                ***REMOVED***
-                ***REMOVED***
-                ***REMOVED***
-                ***REMOVED***
-                ***REMOVED***
-                ***REMOVED***
+                // Your personal data here
             };
             
             this.FillData(formData);
