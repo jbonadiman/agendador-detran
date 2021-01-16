@@ -34,10 +34,7 @@ namespace AgendadorDetran.Core.Robots
             this.GoToDataPage();
             var captchaTask = this.SolveCaptcha();
 
-            var formData = new FormData
-            {
-                // Your personal data here
-            };
+            var formData = new FormData(); // Fill your personal data.
             
             this.FillData(formData);
 
